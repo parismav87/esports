@@ -382,9 +382,9 @@ def readSessions(files):
 					if se == ses.dateString:
 						print "session: " + se
 						ses.readGameData(fullPath, sessionFolder)
-						# ses.generateTimestamps()
-						# ses.readApm(fullPath, sessionFolder)
-						# ses.readPhysiological(fullPath, sessionFolder)
+						ses.generateTimestamps()
+						ses.readApm(fullPath, sessionFolder)
+						ses.readPhysiological(fullPath, sessionFolder)
 						
 
 def createCSV():
@@ -395,44 +395,44 @@ def createCSV():
 		# print "len timestamps ", len(ses.timestamps)
 		if not os.path.exists(ses.dateString):
 			os.makedirs(ses.dateString)
-		# for p in ses.participants:	
-			# pid = str(p.id)
-			# filename = ses.dateString+'/'+p.id+".csv"
-			# with open(filename, 'wb') as csvfile:
-			# 	writer = csv.writer(csvfile, delimiter=',')
-			# 	writer.writerow(["timestamp", "HR", "SC", "APMMouse", "APMKeyboard"])				
-			# 	print pid
-			# 	print ses.dateString
-			# 	print "------"
-			# 	print "len heartrates ", len(ses.heartrates[pid])
-   #  			# print ses.apms
-   #  			# print p.id
-   #  			# print ses.heartrates
-			# 	for t in ses.timestamps:
-			# 		# print "---------->",t
-			# 		arr = []
-			# 		HRString = '-'
-			# 		SCString = '-'
-			# 		APMMouseString = '-'
-			# 		APMKeyboardString = '-'
-			# 		if t in ses.heartrates[pid]:
-			# 			HRString = str(ses.heartrates[pid][t]['value'])
-			# 			# if HRString == "nan":
-			# 			# 	print ses.heartrates[pid][t]['measurements']
-			# 			# 	print ses.heartrates[pid][t]['value']
-			# 		if t in ses.skinconductances[pid]:
-			# 			SCString = str(ses.skinconductances[pid][t]['value'])
-			# 		if t in ses.apms[pid]['mouse']:
-			# 			APMMouseString = str(ses.apms[pid]['mouse'][t]['value'])
-			# 		if t in ses.apms[pid]['keyboard']:
-			# 			APMKeyboardString = str(ses.apms[pid]['keyboard'][t]['value'])
-			# 		arr.append(str(t))
-			# 		arr.append(HRString)
-			# 		arr.append(SCString)
-			# 		arr.append(APMMouseString)
-			# 		arr.append(APMKeyboardString)
-			# 		writer.writerow(arr)
-			# 	# print len(arr)
+		for p in ses.participants:	
+			pid = str(p.id)
+			filename = ses.dateString+'/'+p.id+".csv"
+			with open(filename, 'wb') as csvfile:
+				writer = csv.writer(csvfile, delimiter=',')
+				writer.writerow(["timestamp", "HR", "SC", "APMMouse", "APMKeyboard"])				
+				print pid
+				print ses.dateString
+				print "------"
+				print "len heartrates ", len(ses.heartrates[pid])
+    			# print ses.apms
+    			# print p.id
+    			# print ses.heartrates
+				for t in ses.timestamps:
+					# print "---------->",t
+					arr = []
+					HRString = '-'
+					SCString = '-'
+					APMMouseString = '-'
+					APMKeyboardString = '-'
+					if t in ses.heartrates[pid]:
+						HRString = str(ses.heartrates[pid][t]['value'])
+						# if HRString == "nan":
+						# 	print ses.heartrates[pid][t]['measurements']
+						# 	print ses.heartrates[pid][t]['value']
+					if t in ses.skinconductances[pid]:
+						SCString = str(ses.skinconductances[pid][t]['value'])
+					if t in ses.apms[pid]['mouse']:
+						APMMouseString = str(ses.apms[pid]['mouse'][t]['value'])
+					if t in ses.apms[pid]['keyboard']:
+						APMKeyboardString = str(ses.apms[pid]['keyboard'][t]['value'])
+					arr.append(str(t))
+					arr.append(HRString)
+					arr.append(SCString)
+					arr.append(APMMouseString)
+					arr.append(APMKeyboardString)
+					writer.writerow(arr)
+				# print len(arr)
 		filename = ses.dateString+'/'"games.csv"
 		with open(filename, 'wb') as csvfile:
 			writer = csv.writer(csvfile, delimiter=',')
